@@ -15,6 +15,10 @@ module.exports = {
 
   module: {
     rules: [
+      { 
+        test: /\.pug$/,
+        use: ['pug-loader']
+      },
       {
         test: '/.js$/',
         exclude: /node_modules/,
@@ -52,9 +56,19 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/client/index.html',
-      filename: './index.html'
+      template: './src/client/views/index.pug',
     }),
+     // We need to set our desired filename for login page.
+  new HTMLWebpackPLugin({
+    filename: 'login.html',
+    template: './src/client/views/login.pug'
+  }),
+   // We need to set our desired filename for profile page.
+   new HTMLWebpackPLugin({
+    filename: 'profile.html',
+    template: './src/client/views/profile.pug'
+  }),
+  new HtmlWebpackPugPlugin(),
     new CleanWebpackPlugin({
       // Simulate the removal of files
       dry: true,
